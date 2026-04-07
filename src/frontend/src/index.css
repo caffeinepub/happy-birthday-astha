@@ -1,0 +1,345 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* Birthday palette: purple→pink gradient theme */
+    /* Background: lavender/purple */
+    --background: 0.62 0.09 310;
+    /* Foreground: dark brown/charcoal */
+    --foreground: 0.25 0.03 20;
+
+    /* Card: cream/peach */
+    --card: 0.97 0.02 60;
+    --card-foreground: 0.25 0.03 20;
+
+    /* Popover */
+    --popover: 0.97 0.02 60;
+    --popover-foreground: 0.25 0.03 20;
+
+    /* Primary: gold accent */
+    --primary: 0.72 0.12 80;
+    --primary-foreground: 0.15 0.02 20;
+
+    /* Secondary: pink/mauve */
+    --secondary: 0.78 0.1 350;
+    --secondary-foreground: 0.15 0.02 20;
+
+    /* Muted: soft lavender */
+    --muted: 0.88 0.04 290;
+    --muted-foreground: 0.45 0.04 20;
+
+    /* Accent: pink blush */
+    --accent: 0.82 0.08 10;
+    --accent-foreground: 0.2 0.03 20;
+
+    /* Destructive */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    /* Border */
+    --border: 0.85 0.05 330;
+    --input: 0.9 0.03 60;
+    --ring: 0.72 0.12 80;
+
+    /* Chart */
+    --chart-1: 0.72 0.12 80;
+    --chart-2: 0.78 0.1 350;
+    --chart-3: 0.65 0.15 290;
+    --chart-4: 0.82 0.08 10;
+    --chart-5: 0.88 0.05 60;
+
+    /* Sidebar */
+    --sidebar: 0.55 0.12 290;
+    --sidebar-foreground: 0.97 0.01 60;
+    --sidebar-primary: 0.72 0.12 80;
+    --sidebar-primary-foreground: 0.15 0.02 20;
+    --sidebar-accent: 0.65 0.1 290;
+    --sidebar-accent-foreground: 0.97 0.01 60;
+    --sidebar-border: 0.7 0.08 290;
+    --sidebar-ring: 0.72 0.12 80;
+
+    /* Custom birthday tokens */
+    --bday-purple: 0.52 0.14 290;
+    --bday-pink: 0.65 0.13 345;
+    --bday-gold: 0.72 0.13 80;
+    --bday-gold-light: 0.82 0.1 82;
+    --bday-gold-dark: 0.5 0.1 75;
+    --bday-cream: 0.97 0.02 60;
+    --bday-peach: 0.92 0.05 40;
+    --bday-text-dark: 0.22 0.04 20;
+    --bday-text-mid: 0.38 0.04 20;
+    --bday-footer: 0.45 0.13 285;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+/* ============================================
+   BIRTHDAY GRADIENT BACKGROUND
+   ============================================ */
+.bday-bg {
+  background: linear-gradient(
+    135deg,
+    oklch(0.52 0.14 290) 0%,
+    oklch(0.58 0.13 315) 30%,
+    oklch(0.65 0.13 345) 65%,
+    oklch(0.72 0.11 360) 100%
+  );
+  min-height: 100vh;
+}
+
+/* ============================================
+   CONFETTI ANIMATION
+   ============================================ */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-sway {
+  0%,
+  100% {
+    margin-left: 0px;
+  }
+  25% {
+    margin-left: 15px;
+  }
+  75% {
+    margin-left: -15px;
+  }
+}
+
+@keyframes sparkle-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes balloon-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  animation: confetti-fall linear infinite, confetti-sway ease-in-out infinite;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  animation: sparkle-float ease-in-out infinite;
+  pointer-events: none;
+  font-size: 1.5rem;
+}
+
+.balloon {
+  position: absolute;
+  animation: balloon-float ease-in-out infinite;
+  pointer-events: none;
+  font-size: 3rem;
+  opacity: 0.6;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* ============================================
+   GOLD GRADIENT TEXT
+   ============================================ */
+.gold-text {
+  background: linear-gradient(
+    135deg,
+    oklch(0.5 0.1 75) 0%,
+    oklch(0.72 0.13 80) 30%,
+    oklch(0.82 0.1 82) 50%,
+    oklch(0.72 0.13 80) 70%,
+    oklch(0.5 0.1 75) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+.bday-card {
+  background: linear-gradient(
+    135deg,
+    oklch(0.97 0.02 60) 0%,
+    oklch(0.95 0.04 40) 100%
+  );
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid oklch(0.88 0.06 350 / 0.4);
+}
+
+/* ============================================
+   HEADER STYLES
+   ============================================ */
+.bday-header {
+  background: oklch(0.97 0.02 60 / 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 2px solid oklch(0.85 0.07 350 / 0.5);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   CAROUSEL STYLES
+   ============================================ */
+.carousel-container {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-nav-btn {
+  background: oklch(0.97 0.02 60 / 0.7);
+  backdrop-filter: blur(8px);
+  border: 2px solid oklch(0.85 0.07 350 / 0.5);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: oklch(0.25 0.03 20);
+}
+
+.carousel-nav-btn:hover {
+  background: oklch(0.72 0.13 80 / 0.9);
+  border-color: oklch(0.72 0.13 80);
+  transform: scale(1.1);
+}
+
+/* ============================================
+   GALLERY THUMBNAIL
+   ============================================ */
+.gallery-thumb {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.gallery-thumb:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-thumb-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+  padding: 1.5rem 0.75rem 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-thumb:hover .gallery-thumb-overlay {
+  opacity: 1;
+}
+
+/* ============================================
+   CTA BUTTON
+   ============================================ */
+.bday-cta {
+  background: linear-gradient(
+    135deg,
+    oklch(0.65 0.12 78) 0%,
+    oklch(0.72 0.13 80) 50%,
+    oklch(0.78 0.1 82) 100%
+  );
+  background-size: 200% auto;
+  color: oklch(0.15 0.02 20);
+  border: none;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.bday-cta:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.bday-footer {
+  background: oklch(0.42 0.13 285);
+  color: white;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.52 0.14 290 / 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.72 0.13 80 / 0.8);
+  border-radius: 3px;
+}
